@@ -88,21 +88,4 @@ grep wifi.supplicant_scan_interval system/build.prop
 #perl -pi -e 's/ro.sf.lcd_density=268/ro.sf.lcd_density=320/' system/build.prop
 #grep ro.sf.lcd_density system/build.prop
 
-cp system/build.prop system/build.prop.orig
-mv system/build.prop.new system/build.prop
 
-echo "setting perms on build.prop"
-chmod 644 system/build.prop
-chmod 644 system/build.prop.orig
-
-#echo "Installing wireless settings (hopefully)"
-#mkdir -p data/misc/wifi
-#cp $SLIMFILES/wpa_supplicant.conf data/misc/wifi/wpa_supplicant.conf
-#cp $SLIMFILES/ipconfig.txt data/misc/wifi/ipconfig.txt
-
-echo "Zipping up your file now"
-zip -q -r ~/slimrom-`/bin/date +%m%d%y`.zip *
-adb push ~/slimrom-`/bin/date +%m%d%y`.zip  /sdcard/Download/
-echo "cleaning up..."
-rm -rf $SLIMTMP/*
-echo "Slim completed."
