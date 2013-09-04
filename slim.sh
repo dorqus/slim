@@ -17,20 +17,20 @@ echo "Removing useless apps"
 cd system/app
 for k in `cat $SLIMFILES/apps-to-remove.txt`
 do
-        echo "Now removing: "$k
-        rm $k
+	echo "Now removing: "$k
+	rm $k
 done
 
 echo "Removing sounds and bootanimation"
 cd $SLIMTMP
-rm system/media/audio/ringtones/*
-rm system/media/audio/notifications/*
-rm system/media/bootanimation.zip
+rm system/media/audio/ringtones/* 
+rm system/media/audio/notifications/* 
+rm system/media/bootanimation.zip 
 rm system/media/audio/alarms/*
 rm system/media/audio/ui/*
 
 echo "Installing new boot animation and sounds"
-cp $SLIMFILES/bootanimation.zip system/media/bootanimation.zip
+cp $SLIMFILES/bootanimation.zip system/media/bootanimation.zip 
 cp $SLIMFILES/Old_Phone.ogg system/media/audio/ringtones/Old_Phone.ogg
 cp $SLIMFILES/Merope.ogg system/media/audio/notifications/Merope.ogg
 cp $SLIMFILES/sms-received2.ogg system/media/audio/notifications/sms-received2.ogg
@@ -41,7 +41,6 @@ chmod 644 system/media/audio/notifications/*
 echo "Installing new wifi config"
 cp system/etc/wifi/WCNSS_qcom_cfg.ini system/etc/wifi/WCNSS_qcom_cfg.ini.orig
 rm system/etc/wifi/WCNSS_qcom_cfg.ini
-
 cp $SLIMFILES/WCNSS_qcom_cfg.ini system/etc/wifi/WCNSS_qcom_cfg.ini
 chmod 644 system/etc/wifi/WCNSS_qcom_cfg.ini
 
@@ -60,6 +59,7 @@ chmod 644 system/app/QuickSearchBox.apk
 echo "Installing AOSP Keyboard"
 cp $SLIMFILES/LatinIME.apk system/app/LatinIME.apk
 chmod 644 system/app/LatinIME.apk
+
 echo "editing build.prop - making backup copy first"
 cp system/build.prop system/build.prop.new
 sed -i '/ro.config.ringtone/d' system/build.prop.new
@@ -73,9 +73,9 @@ echo 'ro.config.alarm_alert=sms-received2.ogg' >> system/build.prop.new
 echo "Checking ogg in system/build.prop.new"
 oggs=`grep -c ogg system/build.prop.new`
 if [ $oggs != 3 ]; then
-        echo "wrong number of oggs in build.prop, aborting"
-        echo "there are "$oggs" but there are supposed to be 3"
-        exit 1
+	echo "wrong number of oggs in build.prop, aborting"
+	echo "there are "$oggs" but there are supposed to be 3"
+	exit 1
 fi
 echo "There are "$oggs" .ogg files in system/build.prop.new, copying to system/build.prop"
 
@@ -87,4 +87,21 @@ grep wifi.supplicant_scan_interval system/build.prop
 #perl -pi -e 's/ro.sf.lcd_density=268/ro.sf.lcd_density=320/' system/build.prop
 #grep ro.sf.lcd_density system/build.prop
 
+cp system/build.prop system/build.prop.orig
+mv system/build.prop.new system/build.prop
 
+echo "setting perms on build.prop"
+chmod 644 system/build.prop
+chmod 644 system/build.prop.orig
+
+#echo "Installing wireless settings (hopefully)"
+#mkdir -p data/misc/wifi
+#cp $SLIMFILES/wpa_supplicant.conf data/misc/wifi/wpa_supplicant.conf
+#cp $SLIMFILES/ipconfig.txt data/misc/wifi/ipconfig.txt
+
+echo "Zipping up your file now"
+zip -q -r ~/slimrom-`/bin/date +%m%d%y`.zip *
+adb push ~/slimrom-`/bin/date +%m%d%y`.zip  /sdcard/Download/
+echo "cleaning up..."
+rm -rf $SLIMTMP/*
+echo "Slim completed."
