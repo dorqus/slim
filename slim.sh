@@ -100,8 +100,9 @@ chmod 644 system/build.prop.orig
 #cp $SLIMFILES/ipconfig.txt data/misc/wifi/ipconfig.txt
 
 echo "Zipping up your file now"
-zip -q -r ~/slimrom-`/bin/date +%m%d%y`.zip *
-adb push ~/slimrom-`/bin/date +%m%d%y`.zip  /sdcard/Download/
+DATE=`/bin/date +%m%d%y-%H%M`
+zip -q -r ~/slimrom-$DATE.zip *
+adb push ~/slimrom-$DATE.zip  /sdcard/Download/
 echo "cleaning up..."
 rm -rf $SLIMTMP/*
 echo "Slim completed."
