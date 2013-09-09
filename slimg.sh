@@ -17,8 +17,9 @@ do
 	rm system/app/$k
 done
 echo "Zipping up your file now"
-zip -q -r ~/slimgapps-`/bin/date +%m%d%y`.zip *
-adb push ~/slimgapps-`/bin/date +%m%d%y`.zip  /sdcard/Download/
+DATE=$(/bin/date +%m%d%y-%H%M)
+zip -q -r ~/slimgapps-$DATE.zip *
+adb push ~/slimgapps-$DATE.zip  /sdcard/Download/
 echo "Slim Gapps completed."
 echo "cleaning up - removing temp dir"
 rm -rf ~/slimgtmp/*
