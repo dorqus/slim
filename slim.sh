@@ -4,7 +4,16 @@ if [ $# != 1 ]; then
   exit 1
 fi
 
-# get OS type
+# what OS are we?
+if [ $(uname -s) == "Darwin" ] ; then
+	echo "You're running a Mac, going to use /usr/local/bin/gsed"
+	SED=/usr/local/bin/gsed
+	export SED
+elif [ $(uname -s) == Linux ]; then
+	echo "You're running some flavor of Linux, going to use /usr/bin/sed"
+	SED=/usr/bin/sed
+	export SED
+fi
 
 mkdir -p $HOME/slimtmp
 SLIMTMP=$HOME/slimtmp
@@ -65,9 +74,9 @@ chmod 644 system/app/LatinIME.apk
 
 echo "editing build.prop - making backup copy first"
 cp system/build.prop system/build.prop.new
-sed -i '/ro.config.ringtone/d' system/build.prop.new
-sed -i '/ro.config.notification_sound/d' system/build.prop.new
-sed -i '/ro.config.alarm_alert/d' system/build.prop.new
+$SED -i '/ro.config.ringtone/d' system/build.prop.new
+$SED -i '/ro.config.notification_sound/d' system/build.prop.new
+$SED -i '/ro.config.alarm_alert/d' system/build.prop.new
 
 echo 'ro.config.ringtone=Old_phone.ogg' >> system/build.prop.new
 echo 'ro.config.notification_sound=sms-received2.ogg' >> system/build.prop.new
