@@ -11,7 +11,7 @@ if [ $(uname -s) == "Darwin" ] ; then
 	export SED
 elif [ $(uname -s) == Linux ]; then
 	echo "You're running some flavor of Linux, going to use /usr/bin/sed"
-	SED=/usr/bin/sed
+	SED=/bin/sed
 	export SED
 fi
 
