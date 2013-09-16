@@ -19,7 +19,17 @@ done
 echo "Zipping up your file now"
 DATE=$(/bin/date +%m%d%y-%H%M)
 zip -q -r ~/slimgapps-$DATE.zip *
-adb push ~/slimgapps-$DATE.zip  /sdcard/Download/
+
+# test to see if the phone is connected, and if so, push the .zip to it
+ADB=$(adb devices | wc -l)
+if [ $ADB -ge "3" ]; then
+        echo "Phone is connected, pushing .zip file now"
+	adb push ~/slimgapps-$DATE.zip  /sdcard/Download/
+else
+        echo "Phone is not connected, at your convenience run"
+	"adb push ~/slimgapps-$DATE.zip  /sdcard/Download/"
+fi
+
 echo "Slim Gapps completed."
 echo "cleaning up - removing temp dir"
 rm -rf ~/slimgtmp/*

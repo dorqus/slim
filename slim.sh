@@ -115,7 +115,18 @@ chmod 644 system/build.prop.orig
 echo "Zipping up your file now"
 DATE=`/bin/date +%m%d%y-%H%M`
 zip -q -r ~/slimrom-$DATE.zip *
-adb push ~/slimrom-$DATE.zip  /sdcard/Download/
+
+# test to see if the phone is connected, and if so, push the .zip to it
+
+ADB=$(adb devices | wc -l)
+if [ $ADB -ge "3" ]; then
+	echo "Phone is connected, pushing .zip file now"
+	adb push ~/slimrom-$DATE.zip  /sdcard/Download/
+else
+	echo "Phone is not connected, at your convenience run"
+	"adb push ~/slimrom-$DATE.zip /sdcard/Download/"
+fi
+
 echo "cleaning up..."
 rm -rf $SLIMTMP/*
 echo "Slim completed."
