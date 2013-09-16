@@ -5,12 +5,13 @@ if [ $# != 1 ]; then
 fi
 
 # what OS are we?
-if [ $(uname -s) == "Darwin" ] ; then
+OSTYPE=$(uname -s)
+if [ $OSTYPE = "Darwin" ]; then
 	echo "You're running a Mac, going to use /usr/local/bin/gsed"
 	SED=/usr/local/bin/gsed
 	export SED
-elif [ $(uname -s) == Linux ]; then
-	echo "You're running some flavor of Linux, going to use /usr/bin/sed"
+elif [ $OSTYPE = "Linux" ]; then
+	echo "You're running some flavor of Linux, going to use /bin/sed"
 	SED=/bin/sed
 	export SED
 fi
@@ -91,7 +92,7 @@ if [ $oggs != 3 ]; then
 fi
 echo "There are "$oggs" .ogg files in system/build.prop.new, copying to system/build.prop"
 
-echo "changing wifi scan rate from 15 to 180 seconds in system/build.prop"
+echo "setting wifi scan rate to 180 seconds in system/build.prop"
 perl -pi -e 's/wifi.supplicant_scan_interval=15/wifi.supplicant_scan_interval=180/' system/build.prop
 grep wifi.supplicant_scan_interval system/build.prop
 
