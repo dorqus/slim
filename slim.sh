@@ -107,6 +107,12 @@ echo "setting perms on build.prop"
 chmod 644 system/build.prop
 chmod 644 system/build.prop.orig
 
+echo "Installing onandraid"
+cp $SLIMFILES/onandroid system/bin
+chmod 755 system/bin/onandroid
+cp $SLIMFILES/partlayout4nandroid .
+chmod 644 partlayout4nandroid
+
 #echo "Installing wireless settings (hopefully)"
 #mkdir -p data/misc/wifi
 #cp $SLIMFILES/wpa_supplicant.conf data/misc/wifi/wpa_supplicant.conf
