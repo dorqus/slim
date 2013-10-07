@@ -1,4 +1,7 @@
 #!/bin/sh
+
+SLIM=$HOME/slim
+
 if [ $# != 1 ]; then
   echo "Arguments: $0 </full/path/to/rom.zip>"
   exit 1
@@ -20,7 +23,7 @@ mkdir -p $HOME/slimtmp
 SLIMTMP=$HOME/slimtmp
 rm -rf $SLIMTMP/*
 
-SLIMFILES=$HOME/slimfiles
+SLIMFILES=$SLIM/slimfiles
 cd $SLIMTMP
 
 echo "unzipping original zip"
