@@ -5,17 +5,22 @@ if [ $# != 1 ]; then
 fi
 mkdir -p $HOME/slimgtmp
 rm -rf ~/slimgtmp/*
-SLIMFILES=$HOME/slimfiles
+SLIMFILES=$HOME/slim/slimfiles
 SLIMGHOME=$HOME/slimgtmp
 cd $SLIMGHOME
 echo "unzipping $1 here"
 unzip -q -o $1
 echo "Removing useless apps"
-for k in `cat $SLIMFILES/gapps-to-remove.txt`
+for k in $(cat $SLIMFILES/gapps-to-remove.txt)
 do
 	echo "Now removing: "$k
-	rm system/app/$k
+	find . -name $k -exec rm {} \;
 done
+
+echo "Removing Face Unlock files"
+rm -rf system/vendor/pittpatt
+rm system/lib/libface*
+
 echo "Zipping up your file now"
 DATE=$(/bin/date +%m%d%y-%H%M)
 zip -q -r ~/slimgapps-$DATE.zip *

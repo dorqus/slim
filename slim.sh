@@ -30,11 +30,10 @@ echo "unzipping original zip"
 unzip -q -o $1
 
 echo "Removing useless apps"
-cd system/app
 for k in `cat $SLIMFILES/apps-to-remove.txt`
 do
 	echo "Now removing: "$k
-	rm $k
+	find . -name $k -exec rm -f {} \;
 done
 
 echo "Removing sounds and bootanimation"
@@ -43,7 +42,7 @@ rm system/media/audio/ringtones/*
 rm system/media/audio/notifications/* 
 rm system/media/bootanimation.zip 
 rm system/media/audio/alarms/*
-rm system/media/audio/ui/*
+##rm system/media/audio/ui/*
 
 echo "Installing new boot animation and sounds"
 cp $SLIMFILES/bootanimation.zip system/media/bootanimation.zip 
@@ -54,11 +53,11 @@ chmod 644 system/media/bootanimation.zip
 chmod 644 system/media/audio/ringtones/Old_Phone.ogg
 chmod 644 system/media/audio/notifications/*
 
-echo "Installing new wifi config"
-cp system/etc/wifi/WCNSS_qcom_cfg.ini system/etc/wifi/WCNSS_qcom_cfg.ini.orig
-rm system/etc/wifi/WCNSS_qcom_cfg.ini
-cp $SLIMFILES/WCNSS_qcom_cfg.ini system/etc/wifi/WCNSS_qcom_cfg.ini
-chmod 644 system/etc/wifi/WCNSS_qcom_cfg.ini
+###echo "Installing new wifi config"
+###cp system/etc/wifi/WCNSS_qcom_cfg.ini system/etc/wifi/WCNSS_qcom_cfg.ini.orig
+###rm system/etc/wifi/WCNSS_qcom_cfg.ini
+###cp $SLIMFILES/WCNSS_qcom_cfg.ini system/etc/wifi/WCNSS_qcom_cfg.ini
+###chmod 644 system/etc/wifi/WCNSS_qcom_cfg.ini
 
 echo "Installing new hosts file"
 cp $SLIMFILES/hosts system/etc/hosts
@@ -72,19 +71,22 @@ echo "Installing QuickSearchBox.apk"
 cp $SLIMFILES/QuickSearchBox.apk system/app/QuickSearchBox.apk
 chmod 644 system/app/QuickSearchBox.apk
 
-echo "Installing AOSP Keyboard"
-cp $SLIMFILES/LatinIME.apk system/app/LatinIME.apk
-chmod 644 system/app/LatinIME.apk
+#echo "Installing AOSP Keyboard"
+#cp $SLIMFILES/LatinIME.apk system/app/LatinIME.apk
+#chmod 644 system/app/LatinIME.apk
 
 echo "editing build.prop - making backup copy first"
 cp system/build.prop system/build.prop.new
 $SED -i '/ro.config.ringtone/d' system/build.prop.new
 $SED -i '/ro.config.notification_sound/d' system/build.prop.new
 $SED -i '/ro.config.alarm_alert/d' system/build.prop.new
+$SED -i '/wifi.supplicant_scan_interval/d' system/build.prop.new
+
 
 echo 'ro.config.ringtone=Old_phone.ogg' >> system/build.prop.new
 echo 'ro.config.notification_sound=sms-received2.ogg' >> system/build.prop.new
 echo 'ro.config.alarm_alert=sms-received2.ogg' >> system/build.prop.new
+echo 'wifi.supplicant_scan_interval=360' >> system/build.prop.new
 
 echo "Checking ogg in system/build.prop.new"
 oggs=`grep -c ogg system/build.prop.new`
@@ -95,9 +97,9 @@ if [ $oggs != 3 ]; then
 fi
 echo "There are "$oggs" .ogg files in system/build.prop.new, copying to system/build.prop"
 
-echo "setting wifi scan rate to 180 seconds in system/build.prop"
-perl -pi -e 's/wifi.supplicant_scan_interval=15/wifi.supplicant_scan_interval=180/' system/build.prop
-grep wifi.supplicant_scan_interval system/build.prop
+#echo "setting wifi scan rate to 360 seconds in system/build.prop"
+#perl -pi -e 's/wifi.supplicant_scan_interval=15/wifi.supplicant_scan_interval=360/' system/build.prop
+#grep wifi.supplicant_scan_interval system/build.prop
 
 #echo "setting density from 268 to 320 in system/build.prop"
 #perl -pi -e 's/ro.sf.lcd_density=268/ro.sf.lcd_density=320/' system/build.prop
@@ -110,10 +112,10 @@ echo "setting perms on build.prop"
 chmod 644 system/build.prop
 chmod 644 system/build.prop.orig
 
-echo "Installing onandraid"
+echo "Installing onandroid"
 cp $SLIMFILES/onandroid system/bin
 chmod 755 system/bin/onandroid
-cp $SLIMFILES/partlayout4nandroid .
+cp $SLIMFILES/partlayout4nandroid system/partlayout4nandroid
 chmod 644 partlayout4nandroid
 
 #echo "Installing wireless settings (hopefully)"
@@ -133,7 +135,7 @@ if [ $ADB -ge "3" ]; then
 	adb push ~/slimrom-$DATE.zip  /sdcard/Download/
 else
 	echo "Phone is not connected, at your convenience run"
-	"adb push ~/slimrom-$DATE.zip /sdcard/Download/"
+	"adb push ~/slimrom-"$DATE".zip /sdcard/Download/"
 fi
 
 echo "cleaning up..."
