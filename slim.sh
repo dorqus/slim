@@ -38,11 +38,11 @@ done
 
 echo "Removing sounds and bootanimation"
 cd $SLIMTMP
-rm system/media/audio/ringtones/* 
-rm system/media/audio/notifications/* 
+#rm system/media/audio/ringtones/* 
+#rm system/media/audio/notifications/* 
 rm system/media/bootanimation.zip 
-rm system/media/audio/alarms/*
-##rm system/media/audio/ui/*
+#rm system/media/audio/alarms/*
+#rm system/media/audio/ui/*
 
 echo "Installing new boot animation and sounds"
 cp $SLIMFILES/bootanimation.zip system/media/bootanimation.zip 
@@ -84,8 +84,8 @@ $SED -i '/wifi.supplicant_scan_interval/d' system/build.prop.new
 
 
 echo 'ro.config.ringtone=Old_phone.ogg' >> system/build.prop.new
-echo 'ro.config.notification_sound=sms-received2.ogg' >> system/build.prop.new
-echo 'ro.config.alarm_alert=sms-received2.ogg' >> system/build.prop.new
+echo 'ro.config.notification_sound=Merope.ogg' >> system/build.prop.new
+echo 'ro.config.alarm_alert=Merope.ogg' >> system/build.prop.new
 echo 'wifi.supplicant_scan_interval=360' >> system/build.prop.new
 
 echo "Checking ogg in system/build.prop.new"
