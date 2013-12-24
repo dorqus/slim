@@ -105,6 +105,10 @@ echo "There are "$oggs" .ogg files in system/build.prop.new, copying to system/b
 #perl -pi -e 's/ro.sf.lcd_density=268/ro.sf.lcd_density=320/' system/build.prop
 #grep ro.sf.lcd_density system/build.prop
 
+echo "adding LTE enabler lines to build.prop"
+cat $SLIMFILES/build.prop.lte >> system/build.prop.new
+echo "Done adding LTE enabler lines to build.prop"
+
 cp system/build.prop system/build.prop.orig
 mv system/build.prop.new system/build.prop
 
