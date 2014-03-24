@@ -105,12 +105,13 @@ echo "setting density from 268 to 320 in system/build.prop"
 perl -pi -e 's/ro.sf.lcd_density=268/ro.sf.lcd_density=320/' system/build.prop
 grep ro.sf.lcd_density system/build.prop
 
-#echo "adding LTE enabler lines to build.prop"
-#cat $SLIMFILES/build.prop.lte >> system/build.prop.new
-#echo "Done adding LTE enabler lines to build.prop"
 
 cp system/build.prop system/build.prop.orig
 mv system/build.prop.new system/build.prop
+
+echo "adding LTE enabler lines to build.prop"
+cat $SLIMFILES/build.prop.lte >> system/build.prop.new
+echo "Done adding LTE enabler lines to build.prop"
 
 echo "setting perms on build.prop"
 chmod 644 system/build.prop
