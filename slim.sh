@@ -63,9 +63,9 @@ echo "Installing new hosts file"
 cp $SLIMFILES/hosts system/etc/hosts
 chmod 644 system/etc/hosts
 
-echo "Installing Apollo.apk"
-cp $SLIMFILES/Apollo.apk system/app/Apollo.apk
-chmod 644 system/app/Apollo.apk
+#echo "Installing Apollo.apk"
+#cp $SLIMFILES/Apollo.apk system/app/Apollo.apk
+#chmod 644 system/app/Apollo.apk
 
 echo "Installing QuickSearchBox.apk"
 cp $SLIMFILES/QuickSearchBox.apk system/app/QuickSearchBox.apk
@@ -101,13 +101,13 @@ echo "There are "$oggs" .ogg files in system/build.prop.new, copying to system/b
 #perl -pi -e 's/wifi.supplicant_scan_interval=15/wifi.supplicant_scan_interval=360/' system/build.prop
 #grep wifi.supplicant_scan_interval system/build.prop
 
-#echo "setting density from 268 to 320 in system/build.prop"
-#perl -pi -e 's/ro.sf.lcd_density=268/ro.sf.lcd_density=320/' system/build.prop
-#grep ro.sf.lcd_density system/build.prop
+echo "setting density from 268 to 320 in system/build.prop"
+perl -pi -e 's/ro.sf.lcd_density=268/ro.sf.lcd_density=320/' system/build.prop
+grep ro.sf.lcd_density system/build.prop
 
-echo "adding LTE enabler lines to build.prop"
-cat $SLIMFILES/build.prop.lte >> system/build.prop.new
-echo "Done adding LTE enabler lines to build.prop"
+#echo "adding LTE enabler lines to build.prop"
+#cat $SLIMFILES/build.prop.lte >> system/build.prop.new
+#echo "Done adding LTE enabler lines to build.prop"
 
 cp system/build.prop system/build.prop.orig
 mv system/build.prop.new system/build.prop
