@@ -32,7 +32,7 @@ if [ $ADB -ge "3" ]; then
 	adb push ~/slimgapps-$DATE.zip  /sdcard/Download/
 else
         echo "Phone is not connected, at your convenience run"
-	"adb push ~/slimgapps-$DATE.zip  /sdcard/Download/"
+	echo "adb push ~/slimgapps-$DATE.zip  /sdcard/Download/"
 fi
 
 echo "Slim Gapps completed."
