@@ -139,8 +139,8 @@ if [ $ADB -ge "3" ]; then
 	echo "Phone is connected, pushing .zip file now"
 	adb push ~/slimrom-$DATE.zip  /sdcard/Download/
 else
-	echo "Phone is not connected, at your convenience run"
-	"adb push ~/slimrom-"$DATE".zip /sdcard/Download/"
+	echo "Phone is not connected, at your convenience run:"
+	echo "adb push ~/slimrom-"$DATE".zip /sdcard/Download/"
 fi
 
 echo "cleaning up..."
