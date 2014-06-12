@@ -89,7 +89,7 @@ echo 'ro.config.alarm_alert=Merope.ogg' >> system/build.prop.new
 echo 'wifi.supplicant_scan_interval=360' >> system/build.prop.new
 
 echo "Checking ogg in system/build.prop.new"
-oggs=`grep -c ogg system/build.prop.new`
+oggs=$(grep -c ogg system/build.prop.new)
 if [ $oggs != 3 ]; then
 	echo "wrong number of oggs in build.prop, aborting"
 	echo "there are "$oggs" but there are supposed to be 3"
@@ -105,9 +105,9 @@ echo "setting density from 268 to 320 in system/build.prop"
 perl -pi -e 's/ro.sf.lcd_density=268/ro.sf.lcd_density=320/' system/build.prop.new
 grep ro.sf.lcd_density system/build.prop.new
 
-echo "adding LTE enabler lines to build.prop"
-cat $SLIMFILES/build.prop.lte >> system/build.prop.new
-echo "Done adding LTE enabler lines to build.prop"
+#echo "adding LTE enabler lines to build.prop"
+#cat $SLIMFILES/build.prop.lte >> system/build.prop.new
+#echo "Done adding LTE enabler lines to build.prop"
 
 cp system/build.prop system/build.prop.orig
 mv system/build.prop.new system/build.prop
@@ -129,7 +129,7 @@ chmod 644 system/partlayout4nandroid
 #cp $SLIMFILES/ipconfig.txt data/misc/wifi/ipconfig.txt
 
 echo "Zipping up your file now"
-DATE=`/bin/date +%m%d%y-%H%M`
+DATE=$(/bin/date +%m%d%y-%H%M)
 zip -q -r ~/slimrom-$DATE.zip *
 
 # test to see if the phone is connected, and if so, push the .zip to it
