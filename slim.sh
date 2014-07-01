@@ -71,6 +71,10 @@ echo "Installing QuickSearchBox.apk"
 cp $SLIMFILES/QuickSearchBox.apk system/app/QuickSearchBox.apk
 chmod 644 system/app/QuickSearchBox.apk
 
+echo "Installing Better Battery Stats as system app"
+cp $SLIMFILES/com.asksven.betterbatterystats_xdaedition.apk system/priv-app/com.asksven.betterbatterystats_xdaedition.apk
+chmod 644 system/priv-app/com.asksven.betterbatterystats_xdaedition.apk
+
 #echo "Installing AOSP Keyboard"
 #cp $SLIMFILES/LatinIME.apk system/app/LatinIME.apk
 #chmod 644 system/app/LatinIME.apk
