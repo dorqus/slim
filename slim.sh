@@ -32,7 +32,7 @@ unzip -q -o $1
 echo "Removing useless apps"
 for k in `cat $SLIMFILES/apps-to-remove.txt`
 do
-	echo "Now removing: "$k
+#	echo "Now removing: "$k
 	find . -name $k -exec rm -f {} \;
 done
 

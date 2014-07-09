@@ -13,13 +13,19 @@ unzip -q -o $1
 echo "Removing useless apps"
 for k in $(cat $SLIMFILES/gapps-to-remove.txt)
 do
-	echo "Now removing: "$k
+#	echo "Now removing: "$k
 	find . -name $k -exec rm {} \;
 done
 
 echo "Removing Face Unlock files"
 rm -rf system/vendor/pittpatt
 rm system/lib/libface*
+
+echo "Adding Drive, Keep and YouTube"
+cp $SLIMFILES/Drive.apk system/app/Drive.apk
+cp $SLIMFILES/YouTube.apk system/app/YouTube.apk
+cp $SLIMFILES/Keep.apk system/app/Keep.apk
+chmod 644 system/app/Keep.apk system/app/YouTube.apk system/app/Drive.apk
 
 echo "Zipping up your file now"
 DATE=$(/bin/date +%m%d%y-%H%M)
