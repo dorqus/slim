@@ -23,7 +23,7 @@ mkdir -p $HOME/slimtmp
 SLIMTMP=$HOME/slimtmp
 rm -rf $SLIMTMP/*
 
-SLIMFILES=$SLIM/slimfiles
+SLIMFILES=$HOME/slimfiles
 cd $SLIMTMP
 
 echo "unzipping original zip"
