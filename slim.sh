@@ -63,6 +63,11 @@ echo "Installing new hosts file"
 cp $SLIMFILES/hosts system/etc/hosts
 chmod 644 system/etc/hosts
 
+
+echo "Installing 99vibrator into /system/etc/init.d"
+cp $SLIMFILES/99vibrator system/etc/init.d/99vibrator
+chmod 755 system/etc/init.d/99vibrator
+
 #echo "Installing Apollo.apk"
 #cp $SLIMFILES/Apollo.apk system/app/Apollo.apk
 #chmod 644 system/app/Apollo.apk
@@ -149,4 +154,6 @@ fi
 
 echo "cleaning up..."
 rm -rf $SLIMTMP/*
+
+
 echo "Slim completed."
