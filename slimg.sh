@@ -5,7 +5,7 @@ if [ $# != 1 ]; then
 fi
 mkdir -p $HOME/slimgtmp
 rm -rf ~/slimgtmp/*
-SLIMFILES=$HOME/slim/slimfiles
+SLIMFILES=$HOME/slimfiles
 SLIMGHOME=$HOME/slimgtmp
 cd $SLIMGHOME
 echo "unzipping $1 here"
@@ -21,11 +21,10 @@ echo "Removing Face Unlock files"
 rm -rf system/vendor/pittpatt
 rm system/lib/libface*
 
-echo "Adding Drive, Keep and YouTube"
-cp $SLIMFILES/Drive.apk system/app/Drive.apk
+echo "Adding Keep and YouTube"
 cp $SLIMFILES/YouTube.apk system/app/YouTube.apk
 cp $SLIMFILES/Keep.apk system/app/Keep.apk
-chmod 644 system/app/Keep.apk system/app/YouTube.apk system/app/Drive.apk
+chmod 644 system/app/Keep.apk system/app/YouTube.apk
 
 echo "Zipping up your file now"
 DATE=$(/bin/date +%m%d%y-%H%M)
