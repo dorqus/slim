@@ -10,8 +10,8 @@ fi
 # what OS are we?
 OSTYPE=$(uname -s)
 if [ $OSTYPE = "Darwin" ]; then
-	echo "You're running a Mac, going to use /usr/local/bin/gsed"
-	SED=/usr/local/bin/gsed
+	echo "You're running a Mac, going to use /usr/local/bin/sed"
+	SED=/usr/local/bin/sed
 	export SED
 elif [ $OSTYPE = "Linux" ]; then
 	echo "You're running some flavor of Linux, going to use /bin/sed"
