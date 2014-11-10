@@ -92,7 +92,7 @@ $SED -i '/ro.config.alarm_alert/d' system/build.prop.new
 $SED -i '/wifi.supplicant_scan_interval/d' system/build.prop.new
 
 
-echo 'ro.config.ringtone=Old_phone.ogg' >> system/build.prop.new
+echo 'ro.config.ringtone=Old_Phone.ogg' >> system/build.prop.new
 echo 'ro.config.notification_sound=Merope.ogg' >> system/build.prop.new
 echo 'ro.config.alarm_alert=Merope.ogg' >> system/build.prop.new
 echo 'wifi.supplicant_scan_interval=360' >> system/build.prop.new
