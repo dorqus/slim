@@ -64,7 +64,7 @@ $SED -i '/ro.config.alarm_alert/d' system/build.prop.new
 $SED -i '/wifi.supplicant_scan_interval/d' system/build.prop.new
 
 
-echo 'ro.config.ringtone=Old_phone.ogg' >> system/build.prop.new
+echo 'ro.config.ringtone=Old_Phone.ogg' >> system/build.prop.new
 echo 'ro.config.notification_sound=Merope.ogg' >> system/build.prop.new
 echo 'ro.config.alarm_alert=Merope.ogg' >> system/build.prop.new
 echo 'wifi.supplicant_scan_interval=180' >> system/build.prop.new
@@ -76,7 +76,11 @@ if [ $oggs != 3 ]; then
 	echo "there are "$oggs" but there are supposed to be 3"
 	exit 1
 fi
-echo "There are "$oggs" .ogg files in system/build.prop.new, copying to system/build.prop"
+echo "There are "$oggs" .ogg files in system/build.prop.new"
+
+echo "Stripping out blank lines and comments from system/build.prop.new"
+grep -v ^\# system/build.prop.new | grep . > /tmp/system-build.prop
+cp /tmp/system-build.prop system/build.prop.new
 
 cp system/build.prop system/build.prop.orig
 mv system/build.prop.new system/build.prop
