@@ -91,17 +91,18 @@ chmod 644 system/build.prop.orig
 
 echo "Zipping up your file now"
 DATE=$(/bin/date +%m%d%y-%H%M)
-zip -q -r ~/slim-l-$DATE.zip *
+NEWNAME=$(echo $1 | sed s/\.zip$/-slimmed.zip)
+zip -q -r ~/$NEWNAME *
 
 # test to see if the phone is connected, and if so, push the .zip to it
 
 ADB=$(adb devices | wc -l)
 if [ $ADB -ge "3" ]; then
 	echo "Phone is connected, pushing .zip file now"
-	adb push ~/slim-l-$DATE.zip  /sdcard/Download/
+	adb push ~/$NEWNAME  /sdcard/l/
 else
 	echo "Phone is not connected, at your convenience run:"
-	echo "adb push ~/slim-l-"$DATE".zip /sdcard/Download/"
+	echo "adb push ~/$NEWNAME /sdcard/l/"
 fi
 
 echo "cleaning up..."
