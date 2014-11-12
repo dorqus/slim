@@ -91,7 +91,8 @@ chmod 644 system/build.prop.orig
 
 echo "Zipping up your file now"
 DATE=$(/bin/date +%m%d%y-%H%M)
-NEWNAME=$(echo $1 | sed s/\.zip$/-slimmed.zip)
+NEWNAME=$(basename $1 | $SED s/\.zip$/-slimmed.zip/)
+echo "New zipfile name will be: $NEWNAME"
 zip -q -r ~/$NEWNAME *
 
 # test to see if the phone is connected, and if so, push the .zip to it
