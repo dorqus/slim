@@ -56,6 +56,16 @@ echo "Installing QuickSearchBox.apk"
 cp $SLIMFILES/QuickSearchBox.apk system/app/QuickSearchBox.apk
 chmod 644 system/app/QuickSearchBox.apk
 
+
+echo "Installing Better Battery Stats as system app"
+cp $SLIMFILES/com.asksven.betterbatterystats_xdaedition.apk system/priv-app/com.asksven.betterbatterystats_xdaedition.apk
+chmod 644 system/priv-app/com.asksven.betterbatterystats_xdaedition.apk
+
+
+echo "Installing AppOps as system app"
+cp $SLIMFILES/AppOps.apk system/priv-app/AppOps.apk
+chmod 644 system/priv-app/AppOps.apk
+
 echo "editing build.prop - making backup copy first"
 cp system/build.prop system/build.prop.new
 $SED -i '/ro.config.ringtone/d' system/build.prop.new
