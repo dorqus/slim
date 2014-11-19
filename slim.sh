@@ -45,7 +45,7 @@ rm system/media/bootanimation.zip
 #rm system/media/audio/ui/*
 
 echo "Installing new boot animation and sounds"
-cp $SLIMFILES/bootanimation.zip system/media/bootanimation.zip 
+cp $SLIMFILES/l-bootanimation.zip system/media/bootanimation.zip 
 cp $SLIMFILES/Old_Phone.ogg system/media/audio/ringtones/Old_Phone.ogg
 cp $SLIMFILES/Merope.ogg system/media/audio/notifications/Merope.ogg
 cp $SLIMFILES/sms-received2.ogg system/media/audio/notifications/sms-received2.ogg
